@@ -18,7 +18,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/museum', {
 // Configure multer so that it will upload to '../front-end/public/images'
 const multer = require('multer');
 const upload = multer({
-  dest: '../front-end/public/images/',
+  dest: '/var/www/recipe.taliabird.com/images/',
   limits: {
     fileSize: 10000000
   }
@@ -117,5 +117,5 @@ app.put('/api/items/:id', async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

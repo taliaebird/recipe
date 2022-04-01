@@ -7,10 +7,10 @@
       <h1><strong><em>Recipe Collection</em></strong></h1>
     </div>
     <div class="subtitle">
-      <a class="page-links" href='http://localhost:8080/'>
+      <a class="page-links" href='http://recipe.taliabird.com'>
         <h3>Collection</h3>
       </a>
-      <a class="page-links" href='http://localhost:8080/admin'>
+      <a class="page-links" href='http://recipe.taliabird.com/admin'>
         <h3>Add/Edit Recipes</h3>
       </a>
     </div>
