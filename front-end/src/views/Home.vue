@@ -1,19 +1,19 @@
 <template>
 <div class="home">
+  <p class='instructions'><em>Click on any image to visit the corresponding site.</em></p>
   <section class="image-gallery">
     <div class="image" v-for="item in items" :key="item.id">
-      <h2>{{item.title}}</h2>
+      <h2>{{item.title}} from <em>{{item.source}}</em></h2>
       <p>{{item.description}}</p>
-      <img :src="item.path" />
+      <a v-bind:href=item.link target='_blank'>
+      <img :src="item.path" /></a>
     </div>
   </section>
+
 </div>
 </template>
 
 <style scoped>
-.image h2 {
-  font-style: italic;
-}
 
 /* Masonry */
 *,
@@ -21,21 +21,26 @@
 *:after {
   box-sizing: inherit;
 }
-
+.instructions {
+  text-align: center;
+  height: 70px;
+}
 .image-gallery {
   column-gap: 1.5em;
 }
 
 .image {
   margin: 0 0 1.5em;
-  display: inline-block;
+  display: in-line;
   width: 100%;
 }
 
 .image img {
   width: 100%;
 }
-
+.image p {
+ font-size: 14px;
+}
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
   .image-gallery {

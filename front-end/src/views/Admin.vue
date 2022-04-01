@@ -1,28 +1,31 @@
 <template>
 <div class="admin">
-  <h1>The Admin Page!</h1>
+  <h1>Edit Recipe Book</h1>
   <div class="heading">
   <div class="circle">1</div>
-  <h2>Add an Item</h2>
+  <h2>Add a Recipe</h2>
   </div>
   <div class="add">
   <div class="form">
     <input v-model="title" placeholder="Title">
     <p></p>
+    <input v-model="source" placeholder="Source">
+    <p></p>
     <input v-model="description" placeholder="Description">
+    <p></p>
+    <input v-model="link" placeholder="Link">
     <p></p>
     <input type="file" name="photo" @change="fileChanged">
     <button @click="upload">Upload</button>
   </div>
   <div class="upload" v-if="addItem">
-    <h2>{{addItem.title}}</h2>
-    <p>{{addItem.description}}</p>
+    <h2>{{addItem.title}} from <em>{{addItem.source}}</em></h2>
     <img :src="addItem.path" />
   </div>
   </div>
   <div class="heading">
   <div class="circle">2</div>
-  <h2>Edit/Delete an Item</h2>
+  <h2>Edit/Delete a Recipe</h2>
   </div>
   <div class="edit">
     <div class="form">
@@ -34,7 +37,9 @@
     </div>
     <div class="upload" v-if="findItem">
       <input v-model="findItem.title">
+      <input v-model="findItem.source">
       <input v-model="findItem.description">
+      <input v-model="findItem.link">
       <p></p>
       <img :src="findItem.path" />
     </div>
@@ -83,7 +88,7 @@ input,
 textarea,
 select,
 button {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Space Mono', sans-serif;
   font-size: 1em;
 }
 
@@ -123,7 +128,9 @@ export default {
   data() {
     return {
       title: "",
+      source: "",
       description: "",
+      link: "",
       file: null,
       addItem: null,
       items: [],
@@ -152,7 +159,9 @@ export default {
         let r2 = await axios.post('/api/items', {
           title: this.title,
           path: r1.data.path,
+          source: this.source,
           description: this.description, // New code
+          link: this.link,  // New code
         });
         this.addItem = r2.data;
       } catch (error) {
@@ -186,7 +195,9 @@ export default {
       try {
         await axios.put("/api/items/" + item._id, {
           title: this.findItem.title,
+          source: this.findItem.source,
           description: this.findItem.description,
+          link: this.findItem.link, // new code
         });
         this.findItem = null;
         this.getItems();
